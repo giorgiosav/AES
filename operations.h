@@ -16,8 +16,14 @@ public:
     static char leftRot(char byte, unsigned int n);
     static char rightRot(char byte, unsigned int n);
 
-    static bool bitAt(char byte, int pos);
-    static char oneHotMultiply(char multiplicand, char multiplier);
+    static char modMultiply(char multiplicand, char multiplier);
+
+private:
+    static const char multConst;
+    static bool bitAt(char byte, int pos); // Helper functions
+    static char timesTwo(char multiplicand);
+
+
 };
 
 #endif // OPERATIONS_H

@@ -6,6 +6,8 @@
 
 Operations::Operations() {}
 
+const char Operations::multConst = 27;
+
 bitset<8> Operations::charToBitset(char c) {
     return static_cast<bitset<8>> (c);
 }
@@ -38,21 +40,32 @@ bool Operations::bitAt(char byte, int pos) {
     return byte & mask;
 }
 
-//char Operations::oneHotMultiply(char multiplicand, char multiplier) {
-//    {
-//        int count = 0;
+char Operations::timesTwo(char multiplicand) {
 
-//        for(int i = 0; i < 8; i++) {
-//            if(Operations::bitAt(multiplier, i)) {
-//                count++;
-//            }
-//        }
-//        assert(count == 1);
-//    }
+    if(Operations::bitAt(multiplicand, 7)) {
+        return (multiplicand << 1) ^ multConst;
+    } else {
+        return (multiplicand << 1);
+    }
+}
 
-//    if(multiplier == 1) {
-//        return multiplicand;
-//    } else {
 
-//    }
-//}
+
+char Operations::modMultiply(char multiplicand, char multiplier) {
+    char res = 0;
+
+    if(Operations::bitAt(multiplier, 0)) {
+        res = multiplicand;
+    }
+
+    for(int i = 1; i < 8; i++) {
+        if(Operations::bitAt(multiplier,i)) {
+            char partRes = multiplicand;
+            for(int j = 0; j < i; j++) {
+                partRes = Operations::timesTwo(partRes);
+            }
+            res ^= partRes;
+        }
+    }
+    return res;
+}
