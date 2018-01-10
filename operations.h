@@ -17,6 +17,9 @@ public:
     static char rightRot(char byte, unsigned int n);
 
     static char modMultiply(char multiplicand, char multiplier);
+    static char modInvert(char byte);
+
+    static bitset<8> longDivision(bitset<8> dividend, bitset<8> divisor);
 
 private:
     static const char multConst;

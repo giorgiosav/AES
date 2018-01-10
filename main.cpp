@@ -1,17 +1,18 @@
 #include <QCoreApplication>
-#include <bitset>
 #include <iostream>
 #include "operations.h"
+#include "byte.h"
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
-    char c1 = 64;
-    char c2 = 4;
-    char res = Operations::modMultiply(c1, c2);
+    Byte *byte = new Byte::Byte(string("11001011"));
+    Byte *byte2 = new Byte::Byte(string("00110110"));
+    Byte divisor = *byte2;
+    Byte dividend = *byte;
 
-    cout << Operations::charToBitset(res) << endl;
+   cout << "ex" << endl;
 
     //return a.exec();
     return 0;

@@ -12,6 +12,7 @@ bitset<8> Operations::charToBitset(char c) {
     return static_cast<bitset<8>> (c);
 }
 
+
 bitset<8> Operations::leftRot(bitset<8> byte, unsigned int n) {
     n = n % 8;
     return (byte << n) | (byte >> (-n & 7));
@@ -68,4 +69,13 @@ char Operations::modMultiply(char multiplicand, char multiplier) {
         }
     }
     return res;
+}
+
+bitset<8> Operations::longDivision(bitset<8> dividend, bitset<8> divisor) {
+
+}
+
+
+char Operations::modInvert(char byte) {
+
 }
