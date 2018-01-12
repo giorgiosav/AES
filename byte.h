@@ -25,7 +25,9 @@ public:
 private:
     bitset<8> _byte;
     int msbPos(bitset<8> byte);
+    Byte timesTwo();
     vector<Byte> divide(Byte byte, bool carry);
+    Byte XOR(Byte byte);
 
 
 };
