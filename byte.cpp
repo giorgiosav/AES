@@ -44,6 +44,25 @@ int Byte::msbPos(bitset<8> byte) {
     }
 }
 
+//Logical operations
+
+void Byte::leftRot(unsigned int n) {
+    n = n % 8;
+    _byte =  (_byte << n) | (_byte >> (-n & 7));
+}
+
+void Byte::rightRot(unsigned int n) {
+    n = 8 - n;
+    this->leftRot(n);
+}
+
+Byte Byte::XOR(Byte byte) {
+    Byte *result = new Byte(_byte ^ byte.getByte());
+
+    return *result;
+}
+
+
 //Mathematical operations
 
 
@@ -113,12 +132,6 @@ vector<Byte> Byte::divide(Byte byte, bool carry) {
     results[1] = *(new Byte(dividend));
 
     return results;
-}
-
-Byte Byte::XOR(Byte byte) {
-    Byte *result = new Byte(_byte ^ byte.getByte());
-
-    return *result;
 }
 
 

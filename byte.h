@@ -20,6 +20,9 @@ public:
 
     Byte inverse();
     Byte multiply(Byte byte);
+    void leftRot(unsigned int n);
+    void rightRot(unsigned int n);
+
 
 private:
     bitset<8> _byte;
