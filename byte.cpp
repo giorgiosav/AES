@@ -1,7 +1,7 @@
 #include "byte.h"
 #include "assert.h"
 
-// Constructors
+// Constructors, destructor
 Byte::Byte() {
     _byte = 0;
 }
@@ -22,6 +22,8 @@ Byte::Byte(int n) {
     _byte = bitset<8>(n);
 }
 
+Byte::~Byte() {}
+
 // Setters, getters
 
 bitset<8> Byte::getByte() {
@@ -30,6 +32,11 @@ bitset<8> Byte::getByte() {
 
 void Byte::setByte(bitset<8> byte) {
     _byte = byte;
+}
+
+char Byte::getChar() {
+    char c = _byte.to_ulong();
+    return c;
 }
 
 int Byte::msbPos(bitset<8> byte) {
@@ -46,20 +53,31 @@ int Byte::msbPos(bitset<8> byte) {
 
 //Logical operations
 
-void Byte::leftRot(unsigned int n) {
+Byte Byte::leftRot(unsigned int n) {
     n = n % 8;
-    _byte =  (_byte << n) | (_byte >> (-n & 7));
+    bitset<8> retByte;
+    retByte =  (_byte << n) | (_byte >> (-n & 7));
+
+    return *(new Byte(retByte));
 }
 
-void Byte::rightRot(unsigned int n) {
+Byte Byte::rightRot(unsigned int n) {
     n = 8 - n;
-    this->leftRot(n);
+    return this->leftRot(n);
 }
 
 Byte Byte::XOR(Byte byte) {
     Byte *result = new Byte(_byte ^ byte.getByte());
 
     return *result;
+}
+
+Byte Byte::leftShift(int n) {
+    return *(new Byte(_byte << n));
+}
+
+Byte Byte::rightShift(int n) {
+    return *(new Byte(_byte >> n));
 }
 
 
@@ -97,7 +115,7 @@ Byte Byte::multiply(Byte multiplier) {
             for(int j = 0; j < i; j++) {
                 *partRes = partRes->timesTwo();
             }
-            res->setByte(res->getByte() ^ partRes->getByte());
+            *res = res->XOR(*partRes);
             delete partRes;
         }
     }
@@ -151,7 +169,7 @@ Byte Byte::inverse() {
 
     Byte *mod = new Byte(string("00011011"));
 
-    Byte temp = num;
+    Byte temp = num; // 1st step outside of loop
     num = *mod;
     *mod = temp;
     vector<Byte> quotRem = num.divide(*mod, true);
@@ -166,7 +184,7 @@ Byte Byte::inverse() {
         *x = xOld->XOR(quot.multiply(*x));
         *xOld = temp;
 
-        if(mod->getByte().to_ulong() != 0){
+        if(mod->getByte().to_ulong()){
             quotRem = num.divide(*mod, false);
         }
 
@@ -176,5 +194,7 @@ Byte Byte::inverse() {
     return *xOld;
 
 }
+
+
 
 
