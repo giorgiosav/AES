@@ -20,6 +20,8 @@ public:
 
     Byte at(int row, int col);
 
+    void print();
+
 private:
     string _plainText; //128-bit input
     vector<Byte> _matrix;

@@ -1,4 +1,5 @@
 #include "bytematrix.h"
+#include<iostream>
 
 //Constructors, destructor
 ByteMatrix::ByteMatrix() {
@@ -27,6 +28,15 @@ string ByteMatrix::getText() {
 
 vector<Byte> ByteMatrix::getMatrix() {
     return _matrix;
+}
+
+void ByteMatrix::print() {
+    for(int i = 0; i < 4; i++){
+        for(int j = 0; j < 4; j++) {
+            std::cout << this->at(j,i).getChar();
+        }
+            std::cout << std::endl;
+    }
 }
 
 
