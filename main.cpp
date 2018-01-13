@@ -1,22 +1,25 @@
 #include <QCoreApplication>
 #include <iostream>
-#include "operations.h"
 #include "byte.h"
+#include "bytematrix.h"
+
+using namespace std;
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
-    Byte *byte = new Byte::Byte("00101101");
-    Byte *byte2 = new Byte::Byte(string("00000010"));
-    Byte divisor = *byte2;
-    Byte dividend = *byte;
-    Byte inv = dividend.inverse();
+    ByteMatrix *m = new ByteMatrix("1234567890123456");
 
-    //vector<Byte> div = dividend.divide(divisor, true);
+    for(int i = 0; i < 4; i++) {
+        for(int j = 0; j < 4; j++) {
+            cout << m->at(i,j).getChar() << endl;
 
-   cout << inv.getByte() << endl << dividend.multiply(inv).getByte() << endl;
+        }
+    }
 
+
+    delete m;
     //return a.exec();
     return 0;
 }
