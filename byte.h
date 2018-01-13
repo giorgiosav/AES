@@ -20,6 +20,7 @@ public:
     bitset<8> getByte();
     char getChar();
     void setByte(bitset<8> byte);
+    void setByte(int n);
 
     // Operations
     Byte inverse();
@@ -28,6 +29,7 @@ public:
     Byte rightRot(unsigned int n);
     Byte leftShift(int n);
     Byte rightShift(int n);
+    Byte substitute();
 
 
 private:

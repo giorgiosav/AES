@@ -34,6 +34,10 @@ void Byte::setByte(bitset<8> byte) {
     _byte = byte;
 }
 
+void Byte::setByte(int n) {
+    _byte = bitset<8>(n);
+}
+
 char Byte::getChar() {
     char c = _byte.to_ulong();
     return c;
@@ -193,6 +197,21 @@ Byte Byte::inverse() {
     delete x;
     return *xOld;
 
+}
+
+Byte Byte::substitute() {
+    Byte result;
+    const Byte *rCon = new Byte(0x63);
+    if(!_byte.to_ulong()) {
+        result = this->XOR(*rCon);
+    } else {
+        result = this->inverse();
+        result = result.XOR(result.rightRot(4)).XOR(result.rightRot(5))
+                .XOR(result.rightRot(6)).XOR(result.rightRot(7)).XOR(*rCon);
+    }
+
+    delete rCon;
+    return result;
 }
 
 
