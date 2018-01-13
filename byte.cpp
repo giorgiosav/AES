@@ -90,7 +90,9 @@ vector<Byte> Byte::divide(Byte byte, bool carry) {
     bitset<8> dividend = _byte;
     int msbDividend;
 
-    if(carry) {
+
+    if(!carry) {
+        assert(byte.getByte().to_ulong());
         msbDividend = msbPos(dividend); //MSB positions
     } else {
         msbDividend = 8;
@@ -127,8 +129,8 @@ Byte Byte::inverse() {
     bool edgeCase1 = _byte.to_ulong() == 1;
     Byte num = *this;
 
-    Byte *x, *yOld = new Byte(0);
-    Byte *y, *xOld = new Byte(1);
+    Byte *x = new Byte(1);
+    Byte *xOld = new Byte(0);
 
     if(edgeCase0 || edgeCase1) {
         return num;
@@ -136,28 +138,28 @@ Byte Byte::inverse() {
 
     Byte *mod = new Byte(string("00011011"));
 
-    vector<Byte> quotRem = mod->divide(num, true);
+    Byte temp = num;
+    num = *mod;
+    *mod = temp;
+    vector<Byte> quotRem = num.divide(*mod, true);
 
     while(mod->getByte().to_ulong()) {
         Byte quot = quotRem[0];
         Byte rem = quotRem[1];
-        Byte temp = num;
         num = *mod;
-        mod->setByte(temp.getByte() ^ mod->getByte()); // mod = mod - num
+        *mod = rem;
 
         temp = *x;
         *x = xOld->XOR(quot.multiply(*x));
         *xOld = temp;
 
-        temp = *y;
-        *y = yOld->XOR(quot.multiply(*y));
-        *yOld = temp;
-
-        quotRem = mod->divide(num, false);
+        if(mod->getByte().to_ulong() != 0){
+            quotRem = num.divide(*mod, false);
+        }
 
     }
     delete mod;
-    delete x, y, yOld;
+    delete x;
     return *xOld;
 
 }

@@ -21,13 +21,13 @@ public:
     Byte inverse();
     Byte multiply(Byte byte);
 
-
 private:
     bitset<8> _byte;
     int msbPos(bitset<8> byte);
     Byte timesTwo();
-    vector<Byte> divide(Byte byte, bool carry);
     Byte XOR(Byte byte);
+    vector<Byte> divide(Byte byte, bool carry);
+
 
 
 };
