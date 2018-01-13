@@ -2,6 +2,7 @@
 #include <iostream>
 #include "byte.h"
 #include "bytematrix.h"
+#include "textorganizer.h"
 
 using namespace std;
 
@@ -9,13 +10,11 @@ int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
-    ByteMatrix *m = new ByteMatrix("1234567890123456");
+    TextOrganizer *m = new TextOrganizer("Some random text written here");
+    int len = m->getSequence().size();
 
-    for(int i = 0; i < 4; i++) {
-        for(int j = 0; j < 4; j++) {
-            cout << m->at(i,j).getChar() << endl;
-
-        }
+    for(int i = 0; i < len; i++) {
+        m->getSequence()[i].print();
     }
 
 
