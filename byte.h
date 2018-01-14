@@ -29,6 +29,9 @@ public:
     Byte rightRot(unsigned int n);
     Byte leftShift(int n);
     Byte rightShift(int n);
+    Byte wordLeftRot(bool carry);
+    Byte wordRightRot(bool carry);
+    Byte XOR(Byte byte);
     Byte substitute();
 
 
@@ -38,7 +41,6 @@ private:
     //Helpers
     int msbPos(bitset<8> byte);
     Byte timesTwo();
-    Byte XOR(Byte byte);
     vector<Byte> divide(Byte byte, bool carry);
 
 

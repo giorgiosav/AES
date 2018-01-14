@@ -19,6 +19,8 @@ public:
     vector<Byte> getMatrix();
 
     Byte at(int row, int col);
+    vector<Byte> getWord(int col);
+    void setWord(vector<Byte> word, int col);
 
     void print();
 

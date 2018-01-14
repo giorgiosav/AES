@@ -11,13 +11,13 @@ int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
-    KeyExpansion *m = new KeyExpansion();
-    Byte *b = new Byte(162);
-    vector<Byte> vec = {*b,*b,*b,*b};
-    m->wordRotLeft(vec);
+    KeyExpansion *m = new KeyExpansion("1234567890123456");
+
+    for(int i = 0; i < 11; i++) {
+        m->getSchedule()[i].print();
+    }
 
     delete m;
-    delete b;
     //return a.exec();
     return 0;
 }

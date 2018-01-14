@@ -84,6 +84,17 @@ Byte Byte::rightShift(int n) {
     return *(new Byte(_byte >> n));
 }
 
+Byte Byte::wordLeftRot(bool carry) {
+    _byte = _byte << 1;
+    _byte[0] = carry;
+    return *this;
+}
+
+Byte Byte::wordRightRot(bool carry) {
+    _byte = _byte >> 1;
+    _byte[7] = carry;
+    return *this;
+}
 
 //Mathematical operations
 

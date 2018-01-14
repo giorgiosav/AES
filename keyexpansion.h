@@ -14,16 +14,22 @@ public:
     ~KeyExpansion();
 
     vector<ByteMatrix> getSchedule();
-    void createSchedule();
 
 
 private:
     string _key;
+    vector<Byte> _rCon;
     vector<ByteMatrix> _keyschedule;
-    vector<Byte> genRoundConstant();
+    static vector<Byte> wordLeftRot(vector<Byte> &word);
+    static vector<Byte> genRoundConstant();
 
-    vector<Byte> wordRotLeft(vector<Byte> &word);
-    vector<Byte> gFunc(vector<Byte> &word);
+    static vector<Byte> gFunc(vector<Byte> &word, int round, Byte rCon);
+    static vector<Byte> wordXOR(vector<Byte> word1, vector<Byte> word2);
+
+    void createSchedule();
+
+
+
 
 };
 
