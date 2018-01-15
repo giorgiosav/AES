@@ -12,16 +12,14 @@ Encryption::~Encryption() {}
 vector<ByteMatrix> Encryption::encrypt() {
     vector<ByteMatrix> stateSequence = _textOrganizer.getSequence();
     vector<ByteMatrix> keySchedule = _keyExpansion.getSchedule();
-    //vector<ByteMatrix> output = vector<ByteMatrix>(stateSequence.size());
 
 
     for(int block = 0; block < stateSequence.size(); block++) {
         for(int round = 0; round < 10; round++) {
             stateSequence[block] = keySchedule[round].XOR(stateSequence[block]);
-            //output[round] = stateSequence[round];
             stateSequence[block].subBytes();
             stateSequence[block].shiftRows();
-            stateSequence[block].mixCols();
+            if(round != 9) stateSequence[block].mixCols();
             stateSequence[block] = stateSequence[block].XOR(keySchedule[round + 1]);
         }
     }
