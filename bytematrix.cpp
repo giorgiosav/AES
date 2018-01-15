@@ -33,7 +33,7 @@ vector<Byte> ByteMatrix::getMatrix() {
 void ByteMatrix::print() {
     for(int i = 0; i < 4; i++){
         for(int j = 0; j < 4; j++) {
-            std::cout << this->at(j,i).getByte().to_ulong() << " ";
+            std::cout << this->at(i, j).getByte().to_ulong() << " ";
         }
             std::cout << std::endl;
     }
@@ -48,7 +48,7 @@ void ByteMatrix::createMatrix() { //index order: col * 4 + row
 }
 
 Byte ByteMatrix::at(int row, int col) {
-    return _matrix[row * 4 + col];
+    return _matrix[col * 4 + row];
 }
 
 vector<Byte> ByteMatrix::getWord(int col) {
@@ -62,6 +62,33 @@ vector<Byte> ByteMatrix::getWord(int col) {
 
 void ByteMatrix::setWord(vector<Byte> word, int col) {
     for(int row = 0; row < 4; row++) {
-        _matrix[row * 4 + col] = word[row];
+        _matrix[col * 4 + row] = word[row];
+    }
+}
+
+void ByteMatrix::rotRowLeft(int rowNum, int n) {
+    vector<Byte> matrix = _matrix;
+    for(int col = 0; col < 4; col++) {
+        _matrix[col * 4 + rowNum] = matrix[((col + n)%4)*4 + rowNum];
+    }
+}
+
+void ByteMatrix::shiftRows() {
+    this->rotRowLeft(1, 1);
+    this->rotRowLeft(2, 2);
+    this->rotRowLeft(3, 3);
+}
+
+void ByteMatrix::mixCols() {
+    Byte three = *(new Byte(3));
+    Byte two = *(new Byte(2));
+
+    for(int col = 0; col < 4; col++) {
+        for(int row = 0; row < 4; row++) {
+            _matrix[col * 4 + row] = _matrix[col * 4 + row].multiply(two).XOR(
+                                     _matrix[col * 4 + (row + 1)%4].multiply(three)).XOR(
+                                     _matrix[col * 4 + (row + 2)%4]).XOR(
+                                     _matrix[col * 4 + (row + 3)%4]);
+        }
     }
 }

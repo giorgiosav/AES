@@ -23,11 +23,14 @@ public:
     void setWord(vector<Byte> word, int col);
 
     void print();
+    void shiftRows();
+    void mixCols();
+
 
 private:
     string _plainText; //128-bit input
     vector<Byte> _matrix;
-
+    void rotRowLeft(int rowNum, int n);
     void createMatrix();
 };
 
