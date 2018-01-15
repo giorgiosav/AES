@@ -23,7 +23,15 @@ void ByteMatrix::setText(string text) {
 }
 
 string ByteMatrix::getText() {
-    return _plainText;
+    string output;
+
+    for(int col = 0; col < 4; col++) {
+        for(int row = 0; row < 4; row++) {
+            output.push_back(this->at(row, col).getChar());
+        }
+    }
+
+    return output;
 }
 
 vector<Byte> ByteMatrix::getMatrix() {
@@ -89,6 +97,29 @@ void ByteMatrix::mixCols() {
                                      _matrix[col * 4 + (row + 1)%4].multiply(three)).XOR(
                                      _matrix[col * 4 + (row + 2)%4]).XOR(
                                      _matrix[col * 4 + (row + 3)%4]);
+        }
+    }
+}
+
+void ByteMatrix::setAt(int row, int col, Byte byte) {
+    _matrix[col * 4 + row] = byte;
+}
+
+ByteMatrix ByteMatrix::XOR(ByteMatrix matrix) {
+    ByteMatrix result;
+
+    for(int row = 0; row < 4; row++) {
+        for(int col = 0; col < 4; col++) {
+            result.setAt(row, col, this->at(row, col).XOR(matrix.at(row, col)));
+        }
+    }
+    return result;
+}
+
+void ByteMatrix::subBytes() {
+    for(int row = 0; row < 4; row++) {
+        for(int col = 0; col < 4; col++) {
+            this->setAt(row, col, this->at(row, col).substitute());
         }
     }
 }

@@ -22,9 +22,15 @@ public:
     vector<Byte> getWord(int col);
     void setWord(vector<Byte> word, int col);
 
+    void subBytes();
     void print();
     void shiftRows();
     void mixCols();
+
+    void setAt(int row, int col, Byte byte);
+    ByteMatrix XOR(ByteMatrix matrix);
+
+
 
 
 private:
