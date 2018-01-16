@@ -1,2 +1,5 @@
-aes.pro
-aes.pro.user
+.qmake.stash
+.DS_Store
+.git
+*.pro
+*.user
