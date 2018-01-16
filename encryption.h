@@ -13,6 +13,7 @@ public:
     Encryption(string text, string key);
     ~Encryption();
     string generateCipherText();
+    vector<bool> generateCipherBitStream();
 
 private:
     TextOrganizer _textOrganizer;

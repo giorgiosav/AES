@@ -16,6 +16,7 @@ public:
 
     void setText(string text);
     string getText();
+    vector<bool> getBitStream();
     vector<Byte> getMatrix();
 
     Byte at(int row, int col);

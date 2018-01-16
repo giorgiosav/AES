@@ -35,3 +35,14 @@ string Encryption::generateCipherText() {
     }
     return cipherText;
 }
+
+vector<bool> Encryption::generateCipherBitStream() {
+    vector<ByteMatrix> output = this->encrypt();
+    vector<bool> bitStream;
+
+    for(int i = 0; i < output.size(); i++) {
+        vector<bool> addVec = output[i].getBitStream();
+        bitStream.insert(bitStream.end(),addVec.begin(), addVec.end());
+    }
+    return bitStream;
+}

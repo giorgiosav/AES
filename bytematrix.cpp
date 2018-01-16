@@ -34,6 +34,20 @@ string ByteMatrix::getText() {
     return output;
 }
 
+vector<bool> ByteMatrix::getBitStream() {
+    vector<bool> output;
+
+    for(int col = 0; col < 4; col++) {
+        for(int row = 0; row < 4; row++) {
+            for(int bit = 7; bit >= 0; bit--) {
+                output.push_back(this->at(row, col).getByte()[bit]);
+            }
+        }
+    }
+    return output;
+
+}
+
 vector<Byte> ByteMatrix::getMatrix() {
     return _matrix;
 }
