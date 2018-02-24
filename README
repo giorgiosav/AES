@@ -1,7 +1,0 @@
-#To do:
-
-- Comment code
-- Include decryption
-- Base 85 encoding of output
-- Output bitstream instead of string
-- Accept different key lengths (pad & cut)
