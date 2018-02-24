@@ -10,4 +10,4 @@
 #To correct:
 
 * Don't use keyword __using__ in .h files
-* Initializer lists before constructor body
+* Initializer lists _before_ constructor body
