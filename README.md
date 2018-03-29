@@ -11,3 +11,5 @@
 
 * Don't use keyword __using__ in .h files
 * Initializer lists _before_ constructor body
+* Pass by constant reference
+* Constant member functions
